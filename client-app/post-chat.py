@@ -1,9 +1,10 @@
 import requests
 import json
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'}
 
 def load_chats(last):
 	payload = {'last': last}
-	r = requests.post("http://chat.rakina.me/getHistory", data=payload)
+	r = requests.post("http://chat.rakina.me/getHistory", data=payload, headers=headers)
 	newchat = r.json()
 	ret = last
 	for i in range(len(newchat)):
@@ -13,9 +14,7 @@ def load_chats(last):
 
 username = raw_input("username: ")
 payload = {'username': username}
-
-r = requests.post("http://chat.rakina.me/", data=payload)
-
+r = requests.post("http://chat.rakina.me/hello", data=payload, headers=headers)
 if (r.status_code != 200):
 	exit()
 
@@ -29,6 +28,6 @@ while (True):
 	if (message == ""):
 		continue
 	payload = {'username': username, 'message': message}
-	r = requests.post("http://chat.rakina.me/sendMessage", data=payload)
+	r = requests.post("http://chat.rakina.me/sendMessage", data=payload, headers=headers)
 	last = load_chats(last)
 	last = r.text
