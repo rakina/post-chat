@@ -1,11 +1,15 @@
 import requests
 import json
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'}
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'
+, 'Connection': 'keep-alive'
+}
 
 def load_chats(last):
+	print "loading new messages..."
 	payload = {'last': last}
 	r = requests.post("http://chat.rakina.me/getHistory", data=payload, headers=headers)
 	newchat = r.json()
+	print "\033[A                             \033[A" 
 	ret = last
 	for i in range(len(newchat)):
 		print "~ "+newchat[i]['user'] +": " + newchat[i]['message']
