@@ -16,12 +16,17 @@ Route::get('/',function(){
 });
 
 
-Route::post('/', function()
+Route::put('user/{username}', function()
+{
+	return "Hello, ".$username."!";
+});
+
+Route::get('message/last', function()
 {
 	return  DB::table('chats')->max('id');
 });
 
-Route::post('sendMessage', function()
+Route::post('message', function()
 {
 	$message = new Chat;
 	$message->user = Input::get('username');
@@ -29,7 +34,9 @@ Route::post('sendMessage', function()
 	$message->save();
 	return $message->id;
 });
-Route::post('getHistory', function()
+
+
+Route::get('message', function()
 {
 	$last = Input::get('last');
 	return  Chat::where('id','>',$last)->get();

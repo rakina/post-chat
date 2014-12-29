@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>POSTchat</title>
+	<title>RESTchat</title>
 	<style>
 		@font-face {
 		  font-family: 'VT323';
@@ -25,15 +25,15 @@
 	</style>
 </head>
 <body>
-		<h1> Welcome to POSTchat's page!</h1>
+		<h1> Welcome to RESTchat's page!</h1>
 		
 		<p>
-			To try POSTchat, you must download the client-side program on the
-			<a href = "https://github.com/rakina/post-chat/client-app">github repo</a>.
+			To try RESTchat, you must download the client-side program on the
+			<a href = "https://github.com/rakina/rest-chat">github repo</a>.
 			<br>
 			You need to have <a href = "http://python-requests.org">python-requests</a> library installed before you can start chatting.
 			<br>
-			Run the program from your terminal / command prompt and feel the awesomeness of POSTchat! 
+			Run the program from your terminal / command prompt and feel the awesomeness of RESTchat! 
 		</p>
 
 	</div>

@@ -7,7 +7,8 @@ headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KH
 def load_chats(last):
 	print "loading new messages..."
 	payload = {'last': last}
-	r = requests.post("http://chat.rakina.me/getHistory", data=payload, headers=headers)
+	r = requests.get("http://chat.rakina.me/message", params=payload, headers=headers)
+	
 	newchat = r.json()
 	print "\033[A                             \033[A" 
 	ret = last
@@ -18,10 +19,12 @@ def load_chats(last):
 
 username = raw_input("username: ")
 payload = {'username': username}
-r = requests.post("http://chat.rakina.me/hello", data=payload, headers=headers)
+r = requests.put("http://chat.rakina.me/user/"+username, data=payload, headers=headers)
 if (r.status_code != 200):
 	exit()
+print r.text
 
+r = requests.get("http://chat.rakina.me/message/last", params=payload, headers=headers)
 last = r.text
 print "enter a blank line to refresh chat"
 
@@ -32,6 +35,6 @@ while (True):
 	if (message == ""):
 		continue
 	payload = {'username': username, 'message': message}
-	r = requests.post("http://chat.rakina.me/sendMessage", data=payload, headers=headers)
+	r = requests.post("http://chat.rakina.me/message", data=payload, headers=headers)
 	last = load_chats(last)
 	last = r.text
